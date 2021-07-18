@@ -1,13 +1,12 @@
-my_list = ['в', '5', 'часов', '17', 'минут', 'температура', 'воздуха', 'была', '+5', 'градусов']
-format_list = []
+num_dict = {'zero': 'ноль', 'one': 'один', 'two': 'два', 'three': 'три',
+            'four': 'четыри', 'five': 'пять', 'six': 'шесть',
+            'seven': 'семь', 'eight': 'восемь', 'nine': 'девять', 'ten': 'десять'}
 
-for i in my_list:
-    if i.replace("+", "").replace("-", "").isdigit():
-        if i.isdigit():
-            format_list.append(f"'{int(i):02}'")
-        else:
-            format_list.append(f"'{i[0]}{int(i[1:]):02}'")
-    else:
-        format_list.append(i)
 
-print(" ".join(format_list))
+def num_translate(word):
+    if word.istitle():
+        return str(num_dict.get(word.lower())).title()
+    return num_dict.get(word)
+
+
+print(num_translate(input('Введите число: ')))

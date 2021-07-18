@@ -1,24 +1,23 @@
-# ____ A
-prices_a = [57.08, 46.51, 97, 51, 1.76, 20, 25.08, 76, 23.34, 98.90,
-            70.01, 63, 39, 90.47, 29, 24, 42, 59.11, 45.78, 48.29,
-            8.53, 67, 95, 5.62, 11, 18.34, 13, 64.80, 78, 93, 88.08]
+from random import choice, randrange
 
-for i in prices_a:
-    rub, kop = str(f"{i:.2f}").split(".")
-    print(f"{rub} руб {int(kop):02d} коп,", end=" ")
+nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью", "когда-то", "где-то"]
+adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
 
-# ____ B
-prices_b = [57.08, 46.51, 97, 51, 1.76, 20, 25.08, 76, 23.34, 98.90,
-            70.01, 63, 39, 90.47, 29, 24, 42, 59.11, 45.78, 48.29,
-            8.53, 67, 95, 5.62, 11, 18.34, 13, 64.80, 78, 93, 88.08]
 
-print(f"ID base: {id(prices_b)} - {prices_b}")
-prices_b.sort()
-print(f"ID change: {id(prices_b)} - {prices_b}")
+def some_jokes(n, repeat=False):
+    no, adv, adj = nouns.copy(), adverbs.copy(), adjectives.copy()
+    list_of_j = []
+    list_min = min(no, adv, adj)
 
-# ____ C/D
-prices_cd = [57.08, 46.51, 97, 51, 1.76, 20, 25.08, 76, 23.34, 98.90,
-             70.01, 63, 39, 90.47, 29, 24, 42, 59.11, 45.78, 48.29,
-             8.53, 67, 95, 5.62, 11, 18.34, 13, 64.80, 78, 93, 88.08]
+    while n and len(list_min):
+        num = randrange(len(list_min))
+        if repeat:
+            list_of_j.append(f"{no.pop(num)} {adv.pop(num)} {adj.pop(num)}")
+        else:
+            list_of_j.append(f"{choice(nouns)} {choice(adverbs)} {choice(adjectives)}")
+        n -= 1
+    return list_of_j
 
-print(f"ID change: {id(sorted(prices_cd))} - {sorted(prices_cd, reverse=True)}\n{sorted(prices_cd)[-5:]}")
+
+print(some_jokes(10, True))
