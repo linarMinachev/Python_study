@@ -1,19 +1,15 @@
-from requests import get, utils
-from datetime import date
+from itertools import islice, zip_longest
 
-response = get('http://www.cbr.ru/scripts/XML_daily.asp')
-encodings = utils.get_encoding_from_headers(response.headers)
-content = response.content.decode(encoding=encodings)
+tutors = [
+    'Иван', 'Анастасия', 'Петр', 'Сергей',
+    'Дмитрий', 'Борис', 'Елена'
+]
+klasses = [
+    '9А', '7В', '9Б', '9В', '8Б', '10А'
+]
 
+result = (i for i in zip_longest(tutors, klasses) if len(tutors) > len(klasses))
 
-def currency_rates(kzt):
-    value = content.split("<Valute ID=")
-    d, m, y = map(int, value[0].split('"')[-4].split("."))
-
-    for i in value:
-        if kzt.upper() in i:
-            print(date(year=y, month=m, day=d), end=", ")
-            return float(i.replace("/", "").split("<Value>")[1].replace(",", "."))
-
-
-print(currency_rates("kzt"))
+print(type(result))
+print(*islice(result, 10))
+print(*islice(result, 10))
