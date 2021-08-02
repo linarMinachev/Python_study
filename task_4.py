@@ -1,4 +1,18 @@
-src = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+import os
+import django
+from collections import defaultdict
 
-result = [src[i] for i in range(1, len(src)) if src[i] > src[i - 1]]
-print(result)
+
+def dir_info():
+    root_dir = django.__path__[0]
+    django_files = defaultdict(int)
+    for root, dirs, files in os.walk(root_dir):
+        for file in files:
+            size = 10 ** len(str(os.stat(os.path.join(root, file)).st_size))
+            django_files[size] += 1
+
+    for size, nums in sorted(django_files.items()):
+        print(f"{size}: {nums}")
+
+
+dir_info()

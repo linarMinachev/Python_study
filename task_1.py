@@ -1,7 +1,9 @@
-def odd_nums_31(number):
-    for number in range(1, number + 1, 2):
-        yield number
+import os
 
+my_list = {"my_project": [{"settings": []}, {"mainapp": []}, {"adminapp": []}, {"authapp": []}]}
 
-for i in odd_nums_31(31):
-    print(i)
+for key, value in my_list.items():
+    if not os.path.exists(key):
+        for item in value:
+            for k in item.keys():
+                os.makedirs(os.path.join(key, k))

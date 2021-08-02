@@ -1,15 +1,12 @@
-from itertools import islice, zip_longest
+from os import path, walk, listdir
+import shutil
 
-tutors = [
-    'Иван', 'Анастасия', 'Петр', 'Сергей',
-    'Дмитрий', 'Борис', 'Елена'
-]
-klasses = [
-    '9А', '7В', '9Б', '9В', '8Б', '10А'
-]
+project_name = "my_project_1"
 
-result = (i for i in zip_longest(tutors, klasses) if len(tutors) > len(klasses))
-
-print(type(result))
-print(*islice(result, 10))
-print(*islice(result, 10))
+try:
+    for root, dirs, files in walk(project_name):
+        if "templates" in dirs and root != project_name:
+            for entry in listdir(path.join(root, "templates")):
+                shutil.copytree(path.join(root, "templates", entry), path.join(project_name, "templates", entry))
+except FileExistsError:
+    print("Шаблоны уже обработаны!")
