@@ -3,7 +3,7 @@ import django
 from collections import defaultdict
 
 
-def dir_info():
+def dir_stat():
     root_dir = django.__path__[0]
     django_files = defaultdict(int)
     for root, dirs, files in os.walk(root_dir):
@@ -15,4 +15,4 @@ def dir_info():
         print(f"{size}: {nums}")
 
 
-dir_info()
+dir_stat()

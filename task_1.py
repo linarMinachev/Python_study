@@ -1,8 +1,8 @@
 import os
 
-my_list = {"my_project": [{"settings": []}, {"mainapp": []}, {"adminapp": []}, {"authapp": []}]}
+dir_list = {"my_project": [{"settings": []}, {"mainapp": []}, {"adminapp": []}, {"authapp": []}]}
 
-for key, value in my_list.items():
+for key, value in dir_list.items():
     if not os.path.exists(key):
         for item in value:
             for k in item.keys():

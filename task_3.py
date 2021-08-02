@@ -9,4 +9,4 @@ try:
             for entry in listdir(path.join(root, "templates")):
                 shutil.copytree(path.join(root, "templates", entry), path.join(project_name, "templates", entry))
 except FileExistsError:
-    print("Шаблоны уже обработаны!")
+    print("Шаблоны уже были обработаны!")
